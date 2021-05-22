@@ -44,10 +44,10 @@ public class UserServiceImpl implements IUserService {
 	@Transactional
 	public Integer createUser(UserDto userdto) throws AlreadyExists {
 		Optional<User> optUserbyCon=userdao.findByContact(userdto.getContactNo());
-		if(!optUserbyCon.isPresent())
+		if(optUserbyCon.isPresent())
 			throw new AlreadyExists(LoginConstants.CONTACT_EXISTS);
 		Optional<User> optUserbyEmail=userdao.findByEmail(userdto.getEmailId());
-		if(!optUserbyEmail.isPresent())
+		if(optUserbyEmail.isPresent())
 			throw new AlreadyExists(LoginConstants.EMAILID_EXISTS);
 		User user = new User();
 		user.setUserName(userdto.getUserName().toLowerCase());

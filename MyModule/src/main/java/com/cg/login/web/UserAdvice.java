@@ -54,12 +54,16 @@ public class UserAdvice {
 	
 	@ExceptionHandler(ValidateUserException.class)
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	public ErrorMessage handleException2(ValidateUserException ex) {
+	public ErrorMessage handleValidateException(ValidateUserException ex) {
 		List<String> errors=ex.getErrors().stream()
 				.map(err-> err.getDefaultMessage()).collect(Collectors.toList());
 		return new ErrorMessage(HttpStatus.BAD_REQUEST.toString(), errors);
 	}
 	
-//	public ErrorMessage handleException2(oracle.jdbc.oracleDatabase ex)
+	@ExceptionHandler(AlreadyExists.class)
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	public ErrorMessage handleAlreadyExistsException(AlreadyExists ex) {
+		return new ErrorMessage(HttpStatus.BAD_REQUEST.toString(),ex.getMessage());
+	}
 
 }
