@@ -9,6 +9,9 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/*
+ * Created By Titas Sarkar
+ */
 @Entity
 @Table(name = "login_module_login")
 public class Login{
@@ -45,12 +48,10 @@ public class Login{
 		this.role = role;
 	}
 
-
 	public Login() {
 		
 	}
 	
-
 	public Integer getUserId() {
 		return userId;
 	}
