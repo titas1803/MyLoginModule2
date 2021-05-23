@@ -55,6 +55,7 @@ public class UserRestController {
 				return userSer.viewAllUser();
 			throw new LoginException(LoginConstants.NOT_ADMIN);
 		}
+		
 		throw new LoginException(LoginConstants.INVALID_LOGIN_TOKEN);
 	}
 
