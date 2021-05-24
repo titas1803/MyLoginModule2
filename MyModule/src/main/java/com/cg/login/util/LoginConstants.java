@@ -11,6 +11,7 @@ public class LoginConstants {
 	public static final String INVALID_LOGIN = "You are not Logged in";
 	public static final String LOGGED_OUT = "User Logged Out";
 	public static final String MISSING_REQUEST_HEADER = "Token Id Must Be In the header";
+	public static final String INVALID_TOKEN="Invalid token";
 	public static final String INVALID_DATE_PATTTERN = "Invalid Date Pattern";
 	public static final String NUMERIC_DATE = "Date must be Numeric";
 	public static final String MUST_BE_NUMERIC = "It must be Numeric";

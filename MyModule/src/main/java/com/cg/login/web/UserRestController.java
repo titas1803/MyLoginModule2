@@ -22,6 +22,7 @@ import com.cg.login.exceptions.ValidateUserException;
 import com.cg.login.service.ILoginService;
 import com.cg.login.service.IUserService;
 import com.cg.login.util.LoginConstants;
+import com.cg.login.util.LoginRoles;
 
 /*
  * Created by Soumendu Maitra
@@ -34,6 +35,7 @@ public class UserRestController {
 
 	@Autowired
 	private ILoginService loginSer;
+	
 
 	/*
 	 * Controller Method for creating new Account
@@ -54,7 +56,7 @@ public class UserRestController {
 	public List<User> viewUsers(@RequestHeader("token-id") String tokenId)
 			throws LoginException, UserNotFoundException {
 		if (loginSer.verifyLogin(tokenId)) {
-			if(loginSer.isAdmin(tokenId))
+			if(loginSer.checkRole(tokenId,LoginRoles.ADMIN))
 				return userSer.viewAllUser();
 			throw new LoginException(LoginConstants.NOT_ADMIN);
 		}
@@ -69,7 +71,7 @@ public class UserRestController {
 	public List<User> viewByLocation(@PathVariable("location") String location,
 			@RequestHeader("token-id") String tokenId) throws LoginException, UserNotFoundException {
 		if (loginSer.verifyLogin(tokenId)) {
-			if(loginSer.isAdmin(tokenId))
+			if(loginSer.checkRole(tokenId,LoginRoles.ADMIN))
 				return userSer.viewByLocation(location);
 			throw new LoginException(LoginConstants.NOT_ADMIN);
 		}
@@ -83,7 +85,7 @@ public class UserRestController {
 	public List<User> viewByName(@PathVariable("userName") String userName,
 			@RequestHeader("token-id") String tokenId) throws LoginException, UserNotFoundException {
 		if (loginSer.verifyLogin(tokenId)) {
-			if(loginSer.isAdmin(tokenId))
+			if(loginSer.checkRole(tokenId,LoginRoles.ADMIN))
 				return userSer.viewByName(userName);
 			throw new LoginException(LoginConstants.NOT_ADMIN);
 		}

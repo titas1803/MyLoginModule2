@@ -55,7 +55,9 @@ public class LoginRestController {
 	 * Controller method for logging out
 	 */
 	@GetMapping(value="logout")
-	public SuccessMessage logout(@RequestHeader("token-id") String token, HttpServletRequest req) {
+	public SuccessMessage logout(@RequestHeader("token-id") String token, HttpServletRequest req) throws LoginException {
+		if(!service.getAuthMap().containsKey(token))
+			throw new LoginException(LoginConstants.INVALID_TOKEN);
 		service.getAuthMap().remove(token);
 		return new SuccessMessage(LoginConstants.LOGGED_OUT);
 	}

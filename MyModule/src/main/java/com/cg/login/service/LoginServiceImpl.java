@@ -102,19 +102,15 @@ public class LoginServiceImpl implements ILoginService {
 		}
 		return true;
 	}
-	
-	/*
-	 * Method to check if the logged in user is admin or not
-	 */
 
 	@Override
-	public boolean isAdmin(String tokenid) {
-		boolean role = true;
-		if (authMap.get(tokenid).getRole().equals("admin"))
-			role = true;
+	public boolean checkRole(String tokenid, String role) {
+		boolean isTrue;
+		if (authMap.get(tokenid).getRole().equals(role))
+			isTrue = true;
 		else
-			role = false;
-		return role;
+			isTrue = false;
+		return isTrue;
 	}
 
 }

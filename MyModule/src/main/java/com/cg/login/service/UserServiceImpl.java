@@ -31,10 +31,6 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private ILoginDao logindao;
-	
-	@Autowired
-	private IUserService userSer;
-	
 
 	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -62,7 +58,7 @@ public class UserServiceImpl implements IUserService {
 		userdao.flush();
 		Login login = new Login();
 		login.setPassword(loginSer.encryptString(userdto.getPassword()));
-		login.setRole(userdto.getRole());
+		login.setRole(userdto.getRole().toLowerCase());
 		login.setUser(persistedUser);
 		logindao.save(login);
 		return persistedUser.getUserId();
